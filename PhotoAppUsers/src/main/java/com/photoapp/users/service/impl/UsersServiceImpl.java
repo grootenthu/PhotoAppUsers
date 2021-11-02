@@ -1,10 +1,14 @@
 package com.photoapp.users.service.impl;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +33,7 @@ public class UsersServiceImpl implements UsersService {
 	public UsersDto createUser(UsersDto userDetails) {
 		userDetails.setUserId(UUID.randomUUID().toString());
 		userDetails.setEncryptedPassword(bCryptPasswordEncoder.encode(userDetails.getPassword()));
-		
+
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		UserEntity userEntity = modelMapper.map(userDetails, UserEntity.class);
@@ -38,5 +42,17 @@ public class UsersServiceImpl implements UsersService {
 		UsersDto createdUserResponse = modelMapper.map(createdUser, UsersDto.class);
 
 		return createdUserResponse;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+		UserEntity entity = usersRepository.findByEmail(username);
+
+		if (entity == null) {
+			throw new UsernameNotFoundException(username);
+		}
+
+		return new User(entity.getEmail(), entity.getEncryptedPassword(), true, true, true, true, new ArrayList<>());
 	}
 }
