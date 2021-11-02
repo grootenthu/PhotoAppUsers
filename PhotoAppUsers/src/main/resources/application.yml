@@ -25,3 +25,5 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+gateway:
+  ip: 10.0.2.15
