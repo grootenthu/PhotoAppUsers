@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity implements Serializable {
 
 	/**
@@ -23,19 +23,19 @@ public class UserEntity implements Serializable {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@Column(nullable = false, length = 50)
 	private String firstName;
-	
+
 	@Column(nullable = false, length = 50)
 	private String lastName;
 
 	@Column(nullable = false, length = 100, unique = true)
 	private String email;
-	
+
 	@Column(nullable = false, unique = true)
 	private String userId;
-	
+
 	@Column(nullable = false, unique = true)
 	private String encryptedPassword;
 

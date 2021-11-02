@@ -23,5 +23,6 @@ public class UsersRequestModel {
 	@NotNull (message = "Email cannot be null")
 	@Email
 	private String email;
+	
 
 }
