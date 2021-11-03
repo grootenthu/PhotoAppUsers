@@ -55,4 +55,21 @@ public class UsersServiceImpl implements UsersService {
 
 		return new User(entity.getEmail(), entity.getEncryptedPassword(), true, true, true, true, new ArrayList<>());
 	}
+
+	@Override
+	public UsersDto getUserDetailsByEmail(String email) {
+		
+		UserEntity entity = usersRepository.findByEmail(email);
+		
+		if (entity == null) {
+			throw new UsernameNotFoundException(email);
+		}
+		
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		
+		UsersDto userDetials = modelMapper.map(entity, UsersDto.class);
+		
+		return userDetials;
+	}
 }

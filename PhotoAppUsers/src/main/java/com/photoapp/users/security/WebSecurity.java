@@ -19,7 +19,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final String GATEWAY_IP = "gateway.ip";
 
-	public WebSecurity(Environment environment, UsersService usersService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	public WebSecurity(Environment environment, UsersService usersService,
+			BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.environment = environment;
 		this.usersService = usersService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -35,11 +36,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	}
 
 	private AuthenticationFilter getAuthenticationFilter() throws Exception {
-		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
-		authenticationFilter.setAuthenticationManager(authenticationManager());
+		AuthenticationFilter authenticationFilter = new AuthenticationFilter(usersService, environment,
+				authenticationManager());
+		// not required to set auth manager here
+		// authenticationFilter.setAuthenticationManager(authenticationManager());
 		return authenticationFilter;
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(usersService).passwordEncoder(bCryptPasswordEncoder);

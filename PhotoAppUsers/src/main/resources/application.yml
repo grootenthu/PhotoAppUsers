@@ -27,3 +27,6 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
 gateway:
   ip: 10.0.2.15
+token:
+  secret: lfjo3o4jojfojoj3ojojdfojksopkpppp
+  expiration: 8650400403
