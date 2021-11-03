@@ -40,6 +40,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				authenticationManager());
 		// not required to set auth manager here
 		// authenticationFilter.setAuthenticationManager(authenticationManager());
+		
+		authenticationFilter.setFilterProcessesUrl(environment.getProperty("login.url.path"));
+		
 		return authenticationFilter;
 	}
 

@@ -30,3 +30,6 @@ gateway:
 token:
   secret: lfjo3o4jojfojoj3ojojdfojksopkpppp
   expiration: 8650400403
+login:
+  url:
+    path: /users/login
