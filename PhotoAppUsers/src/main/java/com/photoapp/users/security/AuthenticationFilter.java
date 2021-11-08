@@ -26,13 +26,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-	
+
 	private UsersService usersService;
-	private Environment environment;
-	
-	public AuthenticationFilter(UsersService usersService, Environment environment, AuthenticationManager authenticationManager) {
+	private Environment env;
+
+	public AuthenticationFilter(UsersService usersService, Environment environment,
+			AuthenticationManager authenticationManager) {
 		this.usersService = usersService;
-		this.environment = environment;
+		this.env = environment;
 		super.setAuthenticationManager(authenticationManager);
 	}
 
@@ -49,20 +50,19 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			throw new RuntimeException(ie);
 		}
 	}
-	
+
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
-		
+
 		String userName = ((User) authResult.getPrincipal()).getUsername();
 		UsersDto userDetails = usersService.getUserDetailsByEmail(userName);
-		
-		String token = Jwts.builder()
-						   .setSubject(userDetails.getUserId())
-						   .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(environment.getProperty("token.expiration"))))
-						   .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secret"))
-						   .compact();
-		
+
+		String token = Jwts.builder().setSubject(userDetails.getUserId())
+				.setExpiration(new Date(
+						System.currentTimeMillis() + Long.parseLong(env.getProperty("token.expiration"))))
+				.signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret")).compact();
+
 		response.addHeader("token", token);
 		response.addHeader("userId", userDetails.getUserId());
 	}
