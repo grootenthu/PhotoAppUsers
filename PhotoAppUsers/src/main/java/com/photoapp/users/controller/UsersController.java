@@ -36,7 +36,7 @@ public class UsersController {
 	public String status(@RequestHeader HttpHeaders httpHeaders) {
 		System.out.println("Headers : " + httpHeaders.toString());
 
-		return "Up & Running on port - " + env.getProperty("local.server.port");
+		return "Up & Running on port - " + env.getProperty("local.server.port") + ", " + env.getProperty("token.secret");
 	}
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
