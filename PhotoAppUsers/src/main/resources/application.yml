@@ -19,17 +19,21 @@ spring:
       settings:
         web-allow-others: true
   datasource:
-    username: grootenthu
-    password: grootenthu
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
+    username: admin
+    password: Admin@89
+    url: jdbc:mysql://localhost:3306/photo_app?serverTimezone=UTC
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
+  security:
+    user:
+      name: admin
+      password: admin
 gateway:
   ip: 10.0.2.15
 token:
@@ -38,3 +42,14 @@ token:
 login:
   url:
     path: /users/login
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - beans
+        - httptrace
+        - health
+        - info
+        - routes
+    
