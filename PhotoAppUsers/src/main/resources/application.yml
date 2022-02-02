@@ -30,10 +30,7 @@ spring:
     port: 5672
     username: guest
     password: guest
-  security:
-    user:
-      name: admin
-      password: admin
+
 gateway:
   ip: 10.0.2.15
 token:

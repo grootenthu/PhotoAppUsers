@@ -17,6 +17,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	private Environment environment;
 	private UsersService usersService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    //Use this variable for whitelisting of IP addresses in future
 	private final String GATEWAY_IP = "gateway.ip";
 
 	public WebSecurity(Environment environment, UsersService usersService,
@@ -29,8 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/**").hasIpAddress(environment.getProperty(GATEWAY_IP)).and()
-				.addFilter(getAuthenticationFilter());
+		http.addFilter(getAuthenticationFilter());
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
