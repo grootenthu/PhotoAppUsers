@@ -19,8 +19,8 @@ spring:
       settings:
         web-allow-others: true
   datasource:
-    username: admin
-    password: Admin@89
+    username: "{cipher}AQBfMDa2ILtNBWRn1lvvH+oijnj4p0VULEq9ppb0jGiMwgq3FW3qoCzAyp+eZg7aIzylpbjRjfYzae0LPmTVhrdtWnHJnhcFCmoNnAuZxedt+F7IuwcoAA8hs1ZBMoXXKv8szeEkEnr8rHYrDhQ1VMeSonsTFmNM78BoVHgAVNH+HPXzmJ8ngQbHSOdOZBMT7Bs3OVbPSOp3ASpITvbSg4uSvU1kskV1E1JhenMwgb9Yi+1NNf52HxlzNeze4AFCObcJ5aj4Y1czY0vBTXTE2OZ7aJBIrkFcbJN75WLTjfr6PjGx+F98JYh35htm8J+IdWYWR7nIB4N53THuETUcEkaPAl/dx8yGbC3W+3taDDemBWkPe1MWHCpKpT8V2tFi81g="
+    password: "{cipher}AQBgRKUYCOPG1k8zGuPL9JJ3tg5UQqdtsDTDvVT+G9KpIYC/w6lDAk8Y9ZcZiSZgv5xH96rcxPEM8Ymh7Yysdr+vPltFwP8IqJKoiQUlx7CeyI2BbVJloADo6xRi0Ey0m4kCx6zrcWemQEZsYE+SK3wdUVg8kISTDvi6VXSP3wFEhUaQ/ZpvUgFddxeUKfBVROuGmUvWq1EA3Tf0rmnD2bu6ocDlHEia0cNBLV7M/REFqsM8HP1Cu5LU0X/03R9qIEgDa4jxtAt8DsFIXXSkLE2GjduckJu9Q9IoHdFNaFrPCGcaKbzR/o3qFElL3RwK6/1/LKfldJI+Of0rNRMBGcuqidCmKSqkd5OLY245gaxN+fGKXln+2V3tQLBo7IFS0GA="
     url: jdbc:mysql://localhost:3306/photo_app?serverTimezone=UTC
   jpa:
     hibernate:
@@ -28,8 +28,8 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: guest
-    password: guest
+    username: "{cipher}AQBGyVsXsvpiYKLplZOCEJeo0BQBINMolsllIw0q+CgwALkE+Neh1rSdPj68+Ae4WYzYrfCHuYvIW6E5/SnjRnv757FAOP+pPHm7p2CgbwQiZav5MtaMcHZrFhTApECAlNFBlilb8f1u5YhitZTS+UdZiviJMMJsT1Q2FLyfKSrk5XFN5ycAlVLCgYLw8m3g2Cv1xM071FtnKDCBHL+oY6dpzFTAuxgI5XBlapwa033rFd59PDm+TIC/2jbQ5Lh0JbQ1sbI29cEa9E2pC2HkMU8m6KK/jp8WVigbPee0P9BCYBu7XkI8m0s873qVLLpAnc54AeE+LCfTOVuWMoeoVjkkDyYzx/ti5kDrGX/9cjysBNDsws2puRvhuUciym/PrmA="
+    password: "{cipher}AQBGyVsXsvpiYKLplZOCEJeo0BQBINMolsllIw0q+CgwALkE+Neh1rSdPj68+Ae4WYzYrfCHuYvIW6E5/SnjRnv757FAOP+pPHm7p2CgbwQiZav5MtaMcHZrFhTApECAlNFBlilb8f1u5YhitZTS+UdZiviJMMJsT1Q2FLyfKSrk5XFN5ycAlVLCgYLw8m3g2Cv1xM071FtnKDCBHL+oY6dpzFTAuxgI5XBlapwa033rFd59PDm+TIC/2jbQ5Lh0JbQ1sbI29cEa9E2pC2HkMU8m6KK/jp8WVigbPee0P9BCYBu7XkI8m0s873qVLLpAnc54AeE+LCfTOVuWMoeoVjkkDyYzx/ti5kDrGX/9cjysBNDsws2puRvhuUciym/PrmA="
 
 gateway:
   ip: 10.0.2.15
