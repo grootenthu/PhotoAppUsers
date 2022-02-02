@@ -10,12 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.photoapp.users.api.dto.UsersDto;
 import com.photoapp.users.api.model.UsersRequestModel;
@@ -50,6 +45,15 @@ public class UsersController {
 		UsersResponseModel responseModel = modelMapper.map(createdUser, UsersResponseModel.class);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseModel);
+	}
+
+	@GetMapping(value = "/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<UsersResponseModel> getUser(@PathVariable("userId") String userId) {
+		ModelMapper modelMapper = new ModelMapper();
+		UsersDto usersDto = usersService.getUserById(userId);
+		UsersResponseModel responseModel = modelMapper.map(usersDto, UsersResponseModel.class);
+
+		return ResponseEntity.status(HttpStatus.OK).body(responseModel);
 	}
 
 }

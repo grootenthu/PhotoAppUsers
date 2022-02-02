@@ -9,5 +9,6 @@ import com.photoapp.users.entity.UserEntity;
 public interface UsersRepository extends CrudRepository<UserEntity, Long> {
 	
 	UserEntity findByEmail(String email);
+	UserEntity findByUserId(String userId);
 	
 }

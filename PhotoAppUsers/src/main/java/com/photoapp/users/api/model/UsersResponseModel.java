@@ -2,6 +2,8 @@ package com.photoapp.users.api.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UsersResponseModel {
 	
@@ -9,5 +11,5 @@ public class UsersResponseModel {
 	private String lastName;
 	private String email;
 	private String userId;
-
+	private List<AlbumResponseModel> albums;
 }

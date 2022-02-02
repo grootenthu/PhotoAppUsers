@@ -39,6 +39,9 @@ token:
 login:
   url:
     path: /users/login
+albums:
+  url:
+    path: http://ALBUMS-WS/users/%s/albums
 management:
   endpoints:
     web:
