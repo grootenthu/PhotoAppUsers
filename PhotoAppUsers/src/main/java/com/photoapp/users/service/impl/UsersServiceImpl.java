@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.photoapp.users.api.client.AlbumsServiceClient;
 import com.photoapp.users.api.model.AlbumResponseModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -30,15 +31,17 @@ public class UsersServiceImpl implements UsersService {
 	UsersRepository usersRepository;
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	RestTemplate restTemplate;
+	AlbumsServiceClient albumsServiceClient;
 	Environment environment;
 
 	@Autowired
 	public UsersServiceImpl(UsersRepository usersRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
-							RestTemplate restTemplate, Environment environment) {
+							RestTemplate restTemplate, Environment environment, AlbumsServiceClient albumsServiceClient) {
 		this.usersRepository = usersRepository;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.restTemplate = restTemplate;
 		this.environment = environment;
+		this.albumsServiceClient = albumsServiceClient;
 	}
 
 	@Override
@@ -80,9 +83,9 @@ public class UsersServiceImpl implements UsersService {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		
-		UsersDto userDetials = modelMapper.map(entity, UsersDto.class);
+		UsersDto userDetails = modelMapper.map(entity, UsersDto.class);
 		
-		return userDetials;
+		return userDetails;
 	}
 
 	@Override
@@ -103,5 +106,25 @@ public class UsersServiceImpl implements UsersService {
 
 		usersDto.setAlbums(albumsResponse.getBody());
 		return usersDto;
+	}
+
+	@Override
+	public UsersDto getUserByEmail(String email) {
+
+		UserEntity entity = usersRepository.findByEmail(email);
+
+		if (entity == null) {
+			throw new UsernameNotFoundException(email);
+		}
+
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+		UsersDto userDetails = modelMapper.map(entity, UsersDto.class);
+
+		List<AlbumResponseModel> albumsResponse = albumsServiceClient.getAlbums(email);
+		userDetails.setAlbums(albumsResponse);
+
+		return userDetails;
 	}
 }

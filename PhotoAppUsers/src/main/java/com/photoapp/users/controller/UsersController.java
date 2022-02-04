@@ -56,4 +56,13 @@ public class UsersController {
 		return ResponseEntity.status(HttpStatus.OK).body(responseModel);
 	}
 
+	@GetMapping(value = "/email/{email}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<UsersResponseModel> getUserByEmail(@PathVariable("email") String email) {
+		ModelMapper modelMapper = new ModelMapper();
+		UsersDto usersDto = usersService.getUserByEmail(email);
+		UsersResponseModel responseModel = modelMapper.map(usersDto, UsersResponseModel.class);
+
+		return ResponseEntity.status(HttpStatus.OK).body(responseModel);
+	}
+
 }
