@@ -41,7 +41,15 @@ login:
     path: /users/login
 albums:
   url:
-    path: http://ALBUMS-WS/users/%s/albums
+    path: http://ALBUMS-WS/users/%s/albumss
+feign:
+  client:
+    config:
+      albums-ws:
+        loggerLevel: FULL
+logging:
+  level:
+    com.photoapp.users.api.client.AlbumsServiceClient : debug
 management:
   endpoints:
     web:

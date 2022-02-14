@@ -1,5 +1,7 @@
 package com.photoapp.users;
 
+import com.photoapp.users.api.client.exception.FeignErrorDecoder;
+import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -27,6 +29,16 @@ public class PhotoAppUsersApplication {
 	@LoadBalanced
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
+	}
+
+	@Bean
+	Logger.Level feignClientLogger() {
+		return Logger.Level.FULL;
+	}
+
+	@Bean
+	public FeignErrorDecoder getFeignErrorDecoder() {
+		return new FeignErrorDecoder();
 	}
 
 }
